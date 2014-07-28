@@ -1,4 +1,4 @@
-var x = y = 0
+var x = y = id = 0
 
 interact(".draggable").draggable({
 	onmove: function(event) {
@@ -16,6 +16,7 @@ interact(".draggable").draggable({
 });
 
 $('.add-room').on('click', function(event) {
-	var e = '<div class="draggable"><h1 class="name" contenteditable>name</h1></div>';
+	id++;
+	var e = '<div id=' + id + ' class="draggable"><h1 class="name" contenteditable>name</h1></div>';
 	$('.container').append(e);
 });
