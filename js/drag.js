@@ -16,6 +16,10 @@ interact(".draggable").draggable({
     endOnly: true
 }).autoScroll(true);
 
+function getTransform(x, y) {
+	return 'translate(' + x + ', ' + y + ')';
+}
+
 $('.add-room').on('click', function(event) {
 	id++;
 	var e = '<div id=' + id + ' class="draggable"><h1 class="name" contenteditable>name</h1></div>';
@@ -23,10 +27,18 @@ $('.add-room').on('click', function(event) {
 });
 
 $('#scroll-up').on('mousedown', function(event) {
-	// interval = setInterval(function () {
-	// 	$('.draggable').
-	// }, 100);
-	console.log($('.draggable').css('transform'));
+	var e = $('.draggable'),
+		increment = 10;
+	e.each(function(index) {
+		this.transform("transform", getTransform(0, 0));
+		var m = new WebKitCSSMatrix(e.get().style.transform),
+			x = m.e,
+			y = m.f
+	});
+	interval = setInterval(function () {
+		y -= increment;
+		e.css("transform", getTransform(x, y));
+	}, 100);
 });
 
 $('#scroll-up').on('mouseup', function(event) {
