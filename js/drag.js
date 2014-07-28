@@ -1,5 +1,5 @@
-var x = y = id = 0;
-var interval = 0;
+var x = y = id = interval = 0,
+	increment = 10;
 
 interact(".draggable").draggable({
 	onmove: function(event) {
@@ -12,8 +12,8 @@ interact(".draggable").draggable({
 	}
 })
 .restrict({
-    drag: "parent",
-    endOnly: true
+	drag: "parent",
+	endOnly: true
 }).autoScroll(true);
 
 function getTransform(x, y) {
@@ -27,14 +27,13 @@ $('.add-room').on('click', function(event) {
 });
 
 $('#scroll-up').on('mousedown', function(event) {
-	var e = $('.draggable'),
-		increment = 10;
-	e.each(function(index) {
-		var m = new WebKitCSSMatrix(this.get(0).style.transform),
-			x = m.e,
-			y = m.f;
-		this.css("transform", getTransform(x, y - increment));
-	});
+	$('.draggable').css("top",  "+=" + increment + "px");
+	// e.each(function(index) {
+	// 	var m = new WebKitCSSMatrix(this.get(0).style.transform),
+	// 		x = m.e,
+	// 		y = m.f;
+	// 	this.css("transform", getTransform(x, y - increment));
+	// });
 });
 
 $('#scroll-up').on('mouseup', function(event) {
