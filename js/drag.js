@@ -30,15 +30,11 @@ $('#scroll-up').on('mousedown', function(event) {
 	var e = $('.draggable'),
 		increment = 10;
 	e.each(function(index) {
-		this.transform("transform", getTransform(0, 0));
-		var m = new WebKitCSSMatrix(e.get().style.transform),
+		var m = new WebKitCSSMatrix(this.get(0).style.transform),
 			x = m.e,
-			y = m.f
+			y = m.f;
+		this.css("transform", getTransform(x, y - increment));
 	});
-	interval = setInterval(function () {
-		y -= increment;
-		e.css("transform", getTransform(x, y));
-	}, 100);
 });
 
 $('#scroll-up').on('mouseup', function(event) {
